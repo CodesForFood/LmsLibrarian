@@ -27,12 +27,10 @@ public class BookCopyController {
 	@Autowired
 	private BookCopyService copyService;
 	
-	
 	@GetMapping(value = "/number-of-copies", produces = { XML, JSON })
 	public List<BookCopies> getAllBookCopies(@RequestParam(required = false, defaultValue = "100") int size) {
 		return copyService.getAllBookCopies(size);
 	}
-	
 	
 	@GetMapping(value = "/number-of-copies/ofBook/{bookId}/inBranch/{branchId}", produces = { XML, JSON })
 	public ResponseEntity<BookCopies> getBookCopiesByBookAndBranch(@PathVariable Integer bookId, @PathVariable Integer branchId){
@@ -55,11 +53,13 @@ public class BookCopyController {
 		return copyService.getBookCopiesOfBranch(branchId);	
 	}
 	
+
 	@PostMapping(value = "/number-of-copies", produces = { XML, JSON }, consumes = { XML, JSON })
 	public BookCopies addBookCopies(@RequestBody BookCopies bookCopies) {		
 		return copyService.addBookCopies(bookCopies);
 	}
 	
+
 	@PutMapping(value = "/number-of-copies", produces = { XML, JSON }, consumes = { XML, JSON})
 	public ResponseEntity<BookCopies> updateBookCopies(@RequestBody BookCopies bookCopies) {
 		return copyService.updateBookCopies(bookCopies);
