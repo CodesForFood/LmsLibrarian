@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.smoothstack.lms.librarian.dao.BookCopiesDAO;
 import com.smoothstack.lms.librarian.entity.Book;
@@ -20,7 +21,6 @@ public class BookCopyService {
 
 	@Autowired
 	private BookCopiesDAO copyDAO;
-	
 	
 	public List<BookCopies> getAllBookCopies(int size) {
 		Pageable limit = PageRequest.of(0,size);
@@ -52,10 +52,12 @@ public class BookCopyService {
 				: new ResponseEntity<List<BookCopies>>(HttpStatus.NOT_FOUND);
 	}	
 	
+	@Transactional
 	public BookCopies addBookCopies(BookCopies bookCopies) {		
 		return copyDAO.save(bookCopies);			
 	}	
 	
+	@Transactional
 	public ResponseEntity<BookCopies> updateBookCopies(BookCopies bookCopies) {
 		Book book = bookCopies.getBookCopyId().getBook();
 		LibraryBranch branch  = bookCopies.getBookCopyId().getBranch();

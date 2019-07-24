@@ -51,14 +51,12 @@ public class BookCopyController {
 			return new ResponseEntity<List<BookCopies>>(HttpStatus.BAD_REQUEST);
 		}				
 		return copyService.getBookCopiesOfBranch(branchId);	
-	}
-	
+	}	
 
 	@PostMapping(value = "/number-of-copies", produces = { XML, JSON }, consumes = { XML, JSON })
 	public BookCopies addBookCopies(@RequestBody BookCopies bookCopies) {		
 		return copyService.addBookCopies(bookCopies);
-	}
-	
+	}	
 
 	@PutMapping(value = "/number-of-copies", produces = { XML, JSON }, consumes = { XML, JSON})
 	public ResponseEntity<BookCopies> updateBookCopies(@RequestBody BookCopies bookCopies) {
